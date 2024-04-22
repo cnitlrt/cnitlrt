@@ -25,11 +25,13 @@ jobs:
           github_user_name: ${{ github.repository_owner }}
           gif_out_path: ./assets/github-contribution-grid-snake.gif
           svg_out_path: ./assets/github-contribution-grid-snake.svg
-
-      - name: Push to GitHub
-        uses: EndBug/add-and-commit@v7.2.1
+      - name: Commit and Push Results
+        run: |
+          git config --global user.email ${{ secrets.GIT_NAME }}
+          git config --global user.name ${{ secrets.GIT_EMAIL }}
+          git add .
+          git commit -m "Github action update at `date '+%Y-%m-%d %H:%M:%S'`."
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          branch: master
-          message: 'Generate Contribution Snake'
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
