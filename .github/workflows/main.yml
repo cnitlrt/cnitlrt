@@ -32,3 +32,4 @@ jobs:
           branch: master
           PERSONAL_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           message: 'Generate Contribution Snake'
+          
